@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+void relatorio(int matriz[][3], int linhas, int colunas, float vet[]){
+	for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 3; j++) {
+            vet[i] += matriz[i][j]/3.0;   
+        }
+	}
+}
+int venda3(int matriz[][3], int linhas, int colunas){
+	int cont = 0;
+	for(int j=0; j<3; j++){
+		cont+=matriz[1][j];
+	}
+	return cont;
+}
+int qtd(int matriz[][3], int linhas, int colunas){
+	int cont_qtd = 0;
+	for(int i=0; i<5; i++){
+		if(matriz[i][1]>2000){
+			cont_qtd++ ;
+		}
+	}
+	return cont_qtd;
+}
+float media(int matriz[][3], int linhas, int colunas){
+	float med=0; 
+	int soma=0;
+	for (int i=0; i< linhas; i++){
+		for(int j=0; j<colunas; j++){
+			soma+=matriz[i][j];
+		}	
+	}
+	med=soma/15.0;
+	return med;
+}
+ 
+int main() {
+	setlocale(LC_ALL,"Portuguese");
+	int matriz[5][3];
+	char vendedor[5][50];
+	float vet[3];
+	for (int i = 0; i < 5; i++) {
+		printf("\nDigite o nome do %d vendedor: ", i + 1);
+		scanf("%s", vendedor[i]);
+        for (int j = 0; j < 3; j++) {
+        	printf("\nEntre com a venda do, [%d] vendedor, no mes [%d]: ", i + 1, j + 1);
+            scanf("%d", &matriz[i][j]);
+		}
+	}
+	relatorio(matriz, 5, 3, vet );
+	for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 3; j++) {
+	  	}
+	  	 printf("\nVendedor: %s, media vendida e: %.2f", vendedor[i], vet[i]);
+	}
+	printf("\nO valor total de vendas do segundo vendedor e: %d", venda3(matriz, 5, 3));
+	printf("\nOs vendedores que venderam mais que 2000 no segundo mes e: %d", qtd(matriz, 5, 3));
+	printf("\nA media das vendas e: %.2f", media(matriz, 5, 3));
+
+}
